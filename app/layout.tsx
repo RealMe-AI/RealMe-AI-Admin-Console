@@ -15,10 +15,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "RealMe AI Admin",
   description: "RealMe AI Admin Console",
+  robots: { index: false, follow: false },
   icons: {
-    icon: "/logo.png",
+    icon: "/logo.png"
   }
 }
+
 
 export default function RootLayout({
   children,
