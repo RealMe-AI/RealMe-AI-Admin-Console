@@ -7,6 +7,7 @@ interface SectionCardProps {
   children: ReactNode
   className?: string
   action?: ReactNode
+  onClick?: () => void
 }
 
 export function SectionCard({
@@ -15,9 +16,16 @@ export function SectionCard({
   children,
   className,
   action,
+  onClick,
 }: SectionCardProps) {
   return (
-    <div className={cn("rounded-lg border border-border bg-card", className)}>
+    <div
+      className={cn("rounded-lg border border-border bg-card", onClick && "cursor-pointer transition-colors hover:bg-accent/50", className)}
+      onClick={onClick}
+      role={onClick ? "button" : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onKeyDown={onClick ? (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onClick() } } : undefined}
+    >
       {(title || action) && (
         <div className="flex items-center justify-between border-b border-border px-5 py-3">
           <div>
