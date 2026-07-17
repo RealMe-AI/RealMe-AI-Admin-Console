@@ -1,25 +1,22 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { GoogleIcon } from "../icons/GoogleIcon"
+import { useLogin } from "@/hooks/auth"
+import { Loader } from "../shared/Loader"
 
 export function LoginForm() {
-  const router = useRouter()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [loading, setLoading] = useState(false)
+  const login = useLogin()
 
-  async function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    setLoading(true)
-    await new Promise((r) => setTimeout(r, 1000))
-    setLoading(false)
-    router.push("/dashboard")
+    login.mutate({ login: email, password })
   }
 
   return (
@@ -56,8 +53,8 @@ export function LoginForm() {
         />
       </div>
 
-      <Button type="submit" className="w-full" disabled={loading}>
-        {loading ? "Signing in..." : "Sign in"}
+      <Button type="submit" className="w-full" disabled={login.isPending}>
+        {login.isPending ? <Loader className="text-white" /> : "Sign in"}
       </Button>
 
       <div className="relative">

@@ -6,10 +6,10 @@ export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       accessToken: null,
-      user: null,
-      setAuth: ({ access_token, user }) =>
-        set({ accessToken: access_token, user }),
-      clearAuth: () => set({ accessToken: null, user: null }),
+      isAdmin: false,
+      setAuth: ({ accessToken, isAdmin }) =>
+        set({ accessToken, isAdmin }),
+      clearAuth: () => set({ accessToken: null, isAdmin: false }),
     }),
     {
       name: "realme_ai_admin_auth",
