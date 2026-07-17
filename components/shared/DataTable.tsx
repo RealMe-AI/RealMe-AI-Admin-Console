@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   flexRender,
@@ -7,20 +7,20 @@ import {
   useReactTable,
   type ColumnDef,
   type SortingState,
-} from "@tanstack/react-table"
-import { ArrowUpDown } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { EmptyState } from "./EmptyState"
-import { LoadingSkeleton } from "./LoadingSkeleton"
+} from "@tanstack/react-table";
+import { ArrowUpDown } from "lucide-react";
+import { cn } from "@/utils/utils";
+import { EmptyState } from "./EmptyState";
+import { LoadingSkeleton } from "./LoadingSkeleton";
 
 interface DataTableProps<T> {
-  columns: ColumnDef<T>[]
-  data: T[]
-  sorting?: SortingState
-  onSortingChange?: (sorting: SortingState) => void
-  loading?: boolean
-  emptyTitle?: string
-  emptyDescription?: string
+  columns: ColumnDef<T>[];
+  data: T[];
+  sorting?: SortingState;
+  onSortingChange?: (sorting: SortingState) => void;
+  loading?: boolean;
+  emptyTitle?: string;
+  emptyDescription?: string;
 }
 
 export function DataTable<T>({
@@ -40,14 +40,14 @@ export function DataTable<T>({
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     manualSorting: true,
-  })
+  });
 
   if (loading) {
     return (
       <div className="rounded-lg border border-border">
         <LoadingSkeleton rows={5} columns={columns.length} className="p-4" />
       </div>
-    )
+    );
   }
 
   if (!data.length) {
@@ -55,7 +55,7 @@ export function DataTable<T>({
       <div className="rounded-lg border border-border">
         <EmptyState title={emptyTitle} description={emptyDescription} />
       </div>
-    )
+    );
   }
 
   return (
@@ -74,7 +74,8 @@ export function DataTable<T>({
                       type="button"
                       className={cn(
                         "flex items-center gap-1 select-none",
-                        header.column.getCanSort() && "cursor-pointer hover:text-foreground",
+                        header.column.getCanSort() &&
+                          "cursor-pointer hover:text-foreground",
                       )}
                       onClick={header.column.getToggleSortingHandler()}
                     >
@@ -99,7 +100,10 @@ export function DataTable<T>({
               className="border-b border-border transition-colors last:border-b-0 hover:bg-muted/50"
             >
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="h-12 px-3 text-sm text-card-foreground">
+                <td
+                  key={cell.id}
+                  className="h-12 px-3 text-sm text-card-foreground"
+                >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
@@ -108,7 +112,7 @@ export function DataTable<T>({
         </tbody>
       </table>
     </div>
-  )
+  );
 }
 
-export { createColumnHelper } from "@tanstack/react-table"
+export { createColumnHelper } from "@tanstack/react-table";

@@ -1,20 +1,33 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { TrendingUp, TrendingDown, Minus, Users, Activity, DollarSign, Cpu } from "lucide-react"
-import type { Stat } from "@/types/dashboard"
-import { cn } from "@/lib/utils"
+import { motion } from "framer-motion";
+import {
+  TrendingUp,
+  TrendingDown,
+  Minus,
+  Users,
+  Activity,
+  DollarSign,
+  Cpu,
+} from "lucide-react";
+import type { Stat } from "@/types/dashboard";
+import { cn } from "@/utils/utils";
 
 const iconMap: Record<string, React.ElementType> = {
   Users,
   Activity,
   DollarSign,
   Cpu,
-}
+};
 
 export function StatCard({ stat, index }: { stat: Stat; index: number }) {
-  const Icon = iconMap[stat.icon] || Activity
-  const TrendIcon = stat.changeType === "positive" ? TrendingUp : stat.changeType === "negative" ? TrendingDown : Minus
+  const Icon = iconMap[stat.icon] || Activity;
+  const TrendIcon =
+    stat.changeType === "positive"
+      ? TrendingUp
+      : stat.changeType === "negative"
+        ? TrendingDown
+        : Minus;
 
   return (
     <motion.div
@@ -25,7 +38,9 @@ export function StatCard({ stat, index }: { stat: Stat; index: number }) {
     >
       <div className="flex items-start justify-between">
         <div className="space-y-1">
-          <p className="text-xs font-medium text-muted-foreground">{stat.label}</p>
+          <p className="text-xs font-medium text-muted-foreground">
+            {stat.label}
+          </p>
           <p className="text-2xl font-semibold tracking-tight text-card-foreground">
             {stat.value}
           </p>
@@ -56,5 +71,5 @@ export function StatCard({ stat, index }: { stat: Stat; index: number }) {
         <span className="text-xs text-muted-foreground">vs last month</span>
       </div>
     </motion.div>
-  )
+  );
 }

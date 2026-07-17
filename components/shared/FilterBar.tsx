@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import type { ReactNode } from "react"
-import { cn } from "@/lib/utils"
+import type { ReactNode } from "react";
+import { cn } from "@/utils/utils";
 
 interface FilterOption {
-  value: string
-  label: string
+  value: string;
+  label: string;
 }
 
 interface FilterSelectProps {
-  label: string
-  value: string
-  options: FilterOption[]
-  onChange: (value: string) => void
-  placeholder?: string
+  label: string;
+  value: string;
+  options: FilterOption[];
+  onChange: (value: string) => void;
+  placeholder?: string;
 }
 
 function FilterSelect({
@@ -37,12 +37,12 @@ function FilterSelect({
         </option>
       ))}
     </select>
-  )
+  );
 }
 
 interface FilterBarProps {
-  children?: ReactNode
-  className?: string
+  children?: ReactNode;
+  className?: string;
 }
 
 export function FilterBar({ children, className }: FilterBarProps) {
@@ -50,7 +50,7 @@ export function FilterBar({ children, className }: FilterBarProps) {
     <div className={cn("flex flex-wrap items-center gap-2", className)}>
       {children}
     </div>
-  )
+  );
 }
 
-export { FilterSelect }
+export { FilterSelect };

@@ -1,7 +1,7 @@
-import { cn } from "@/lib/utils"
+import { cn } from "@/utils/utils";
 
 interface StatusBadgeProps {
-  status: string
+  status: string;
 }
 
 const variants: Record<string, string> = {
@@ -11,7 +11,7 @@ const variants: Record<string, string> = {
   free: "bg-muted text-muted-foreground",
   pro: "bg-info/10 text-info",
   enterprise: "bg-primary/10 text-primary",
-}
+};
 
 export function StatusBadge({ status }: StatusBadgeProps) {
   return (
@@ -23,5 +23,5 @@ export function StatusBadge({ status }: StatusBadgeProps) {
     >
       {status}
     </span>
-  )
+  );
 }

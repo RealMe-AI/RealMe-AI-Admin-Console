@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Check, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { cn } from "@/lib/utils"
-import type { Plan } from "@/types/pricing"
+import { motion } from "framer-motion";
+import { Check, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/utils/utils";
+import type { Plan } from "@/types/pricing";
 
 interface PricingCardProps {
-  plan: Plan
-  index: number
+  plan: Plan;
+  index: number;
 }
 
 export function PricingCard({ plan, index }: PricingCardProps) {
@@ -70,5 +70,5 @@ export function PricingCard({ plan, index }: PricingCardProps) {
         {plan.cta}
       </Button>
     </motion.div>
-  )
+  );
 }
