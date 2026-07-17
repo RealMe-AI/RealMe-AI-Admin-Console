@@ -1,22 +1,22 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import Image from "next/image"
-import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
-import { sidebarItems } from "@/constants/sidebar"
-import { Button } from "@/components/ui/button"
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { cn } from "@/utils/utils";
+import { sidebarItems } from "@/constants/sidebar";
+import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet"
-import { Menu } from "lucide-react"
+} from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
 
 export function MobileSidebar() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <Sheet>
@@ -43,7 +43,7 @@ export function MobileSidebar() {
         <nav className="space-y-1 p-2">
           {sidebarItems.map((item) => {
             const isActive =
-              pathname === item.href || pathname.startsWith(item.href + "/")
+              pathname === item.href || pathname.startsWith(item.href + "/");
             return (
               <Link
                 key={item.href}
@@ -58,10 +58,10 @@ export function MobileSidebar() {
                 <item.icon className="size-5 shrink-0" />
                 {item.label}
               </Link>
-            )
+            );
           })}
         </nav>
       </SheetContent>
     </Sheet>
-  )
+  );
 }

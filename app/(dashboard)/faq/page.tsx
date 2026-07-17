@@ -1,30 +1,27 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { ChevronDown, Search } from "lucide-react"
-import { PageHeader } from "@/components/shared/PageHeader"
-import { PageContainer } from "@/components/shared/PageContainer"
-import { PageContainer as SectionContainer } from "@/components/shared/PageContainer"
-import { faqData } from "@/data/faq"
-import { cn } from "@/lib/utils"
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown, Search } from "lucide-react";
+import { PageHeader } from "@/components/shared/PageHeader";
+import { PageContainer } from "@/components/shared/PageContainer";
+import { PageContainer as SectionContainer } from "@/components/shared/PageContainer";
+import { faqData } from "@/data/faq";
+import { cn } from "@/utils/utils";
 
 export default function FAQPage() {
-  const [search, setSearch] = useState("")
-  const [openId, setOpenId] = useState<string | null>(null)
+  const [search, setSearch] = useState("");
+  const [openId, setOpenId] = useState<string | null>(null);
 
   const filtered = faqData.filter(
     (item) =>
       item.question.toLowerCase().includes(search.toLowerCase()) ||
       item.answer.toLowerCase().includes(search.toLowerCase()),
-  )
+  );
 
   return (
     <PageContainer>
-      <PageHeader
-        title="FAQ"
-        description="Frequently asked questions"
-      />
+      <PageHeader title="FAQ" description="Frequently asked questions" />
 
       <div className="relative max-w-md">
         <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
@@ -77,5 +74,5 @@ export default function FAQPage() {
         )}
       </div>
     </PageContainer>
-  )
+  );
 }

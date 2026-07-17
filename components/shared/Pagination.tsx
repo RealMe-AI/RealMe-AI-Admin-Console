@@ -1,35 +1,43 @@
-"use client"
+"use client";
 
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/utils/utils";
 
 interface PaginationProps {
-  page: number
-  totalPages: number
-  onPageChange: (page: number) => void
+  page: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
 }
 
-export function Pagination({ page, totalPages, onPageChange }: PaginationProps) {
-  if (totalPages <= 1) return null
+export function Pagination({
+  page,
+  totalPages,
+  onPageChange,
+}: PaginationProps) {
+  if (totalPages <= 1) return null;
 
   function getPages(): (number | "...")[] {
-    const pages: (number | "...")[] = []
-    const delta = 1
+    const pages: (number | "...")[] = [];
+    const delta = 1;
 
-    pages.push(1)
+    pages.push(1);
 
-    if (page - delta > 2) pages.push("...")
+    if (page - delta > 2) pages.push("...");
 
-    for (let i = Math.max(2, page - delta); i <= Math.min(totalPages - 1, page + delta); i++) {
-      pages.push(i)
+    for (
+      let i = Math.max(2, page - delta);
+      i <= Math.min(totalPages - 1, page + delta);
+      i++
+    ) {
+      pages.push(i);
     }
 
-    if (page + delta < totalPages - 1) pages.push("...")
+    if (page + delta < totalPages - 1) pages.push("...");
 
-    if (totalPages > 1) pages.push(totalPages)
+    if (totalPages > 1) pages.push(totalPages);
 
-    return pages
+    return pages;
   }
 
   return (
@@ -45,7 +53,10 @@ export function Pagination({ page, totalPages, onPageChange }: PaginationProps) 
 
       {getPages().map((p, i) =>
         p === "..." ? (
-          <span key={`ellipsis-${i}`} className="px-1 text-xs text-muted-foreground">
+          <span
+            key={`ellipsis-${i}`}
+            className="px-1 text-xs text-muted-foreground"
+          >
             ...
           </span>
         ) : (
@@ -74,5 +85,5 @@ export function Pagination({ page, totalPages, onPageChange }: PaginationProps) 
         <ChevronRight className="size-4" />
       </Button>
     </div>
-  )
+  );
 }

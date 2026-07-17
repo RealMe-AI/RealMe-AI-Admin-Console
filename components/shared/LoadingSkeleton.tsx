@@ -1,10 +1,10 @@
-import { Skeleton } from "@/components/ui/skeleton"
-import { cn } from "@/lib/utils"
+import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/utils/utils";
 
 interface LoadingSkeletonProps {
-  rows?: number
-  columns?: number
-  className?: string
+  rows?: number;
+  columns?: number;
+  className?: string;
 }
 
 export function LoadingSkeleton({
@@ -22,7 +22,7 @@ export function LoadingSkeleton({
         </div>
       ))}
     </div>
-  )
+  );
 }
 
 export function CardSkeleton() {
@@ -34,5 +34,5 @@ export function CardSkeleton() {
         <Skeleton className="h-3 w-16" />
       </div>
     </div>
-  )
+  );
 }

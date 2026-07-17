@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useRef } from "react"
-import { Search, X } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { useState, useEffect, useRef } from "react";
+import { Search, X } from "lucide-react";
+import { cn } from "@/utils/utils";
 
 interface SearchBarProps {
-  value?: string
-  onChange: (value: string) => void
-  placeholder?: string
-  debounce?: number
-  className?: string
+  value?: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+  debounce?: number;
+  className?: string;
 }
 
 export function SearchBar({
@@ -19,17 +19,17 @@ export function SearchBar({
   debounce = 300,
   className,
 }: SearchBarProps) {
-  const [localValue, setLocalValue] = useState(value)
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const [localValue, setLocalValue] = useState(value);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    setLocalValue(value)
-  }, [value])
+    setLocalValue(value);
+  }, [value]);
 
   function handleChange(val: string) {
-    setLocalValue(val)
-    if (timeoutRef.current) clearTimeout(timeoutRef.current)
-    timeoutRef.current = setTimeout(() => onChange(val), debounce)
+    setLocalValue(val);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => onChange(val), debounce);
   }
 
   return (
@@ -52,5 +52,5 @@ export function SearchBar({
         </button>
       )}
     </div>
-  )
+  );
 }

@@ -1,18 +1,19 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
-import type { SidebarItemConfig } from "@/constants/sidebar"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { cn } from "@/utils/utils";
+import type { SidebarItemConfig } from "@/constants/sidebar";
 
 interface SidebarItemProps {
-  item: SidebarItemConfig
-  collapsed: boolean
+  item: SidebarItemConfig;
+  collapsed: boolean;
 }
 
 export function SidebarItem({ item, collapsed }: SidebarItemProps) {
-  const pathname = usePathname()
-  const isActive = pathname === item.href || pathname.startsWith(item.href + "/")
+  const pathname = usePathname();
+  const isActive =
+    pathname === item.href || pathname.startsWith(item.href + "/");
 
   return (
     <Link
@@ -26,9 +27,7 @@ export function SidebarItem({ item, collapsed }: SidebarItemProps) {
       )}
     >
       <item.icon className="size-5 shrink-0" />
-      {!collapsed && (
-        <span className="truncate">{item.label}</span>
-      )}
+      {!collapsed && <span className="truncate">{item.label}</span>}
     </Link>
-  )
+  );
 }

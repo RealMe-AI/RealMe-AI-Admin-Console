@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { PhoneCall, Braces, DollarSign, Timer } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { motion } from "framer-motion";
+import { PhoneCall, Braces, DollarSign, Timer } from "lucide-react";
+import { cn } from "@/utils/utils";
 
 interface UsageStat {
-  label: string
-  value: string
-  icon: React.ElementType
+  label: string;
+  value: string;
+  icon: React.ElementType;
 }
 
 const iconMap: Record<string, React.ElementType> = {
@@ -15,10 +15,18 @@ const iconMap: Record<string, React.ElementType> = {
   totalTokens: Braces,
   totalCost: DollarSign,
   avgResponseTime: Timer,
-}
+};
 
-export function UsageCard({ id, label, value }: { id: string; label: string; value: string }) {
-  const Icon = iconMap[id] || PhoneCall
+export function UsageCard({
+  id,
+  label,
+  value,
+}: {
+  id: string;
+  label: string;
+  value: string;
+}) {
+  const Icon = iconMap[id] || PhoneCall;
 
   return (
     <motion.div
@@ -39,7 +47,7 @@ export function UsageCard({ id, label, value }: { id: string; label: string; val
         </div>
       </div>
     </motion.div>
-  )
+  );
 }
 
 export function UsageCards() {
@@ -50,5 +58,5 @@ export function UsageCards() {
       <UsageCard id="totalCost" label="Total Cost" value="$14,289.50" />
       <UsageCard id="avgResponseTime" label="Avg Response Time" value="1.8s" />
     </div>
-  )
+  );
 }
