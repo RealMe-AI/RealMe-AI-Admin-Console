@@ -15,7 +15,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
               className="dark:invert"
             />
           </Link>
-          <h1 className="text-xl font-semibold tracking-tight">RealMe AI</h1>
+          {/* <h1 className="text-xl font-semibold tracking-tight">RealMe AI</h1> */}
         </div>
 
         <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
