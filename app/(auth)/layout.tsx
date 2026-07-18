@@ -22,7 +22,7 @@ export default function AuthLayout({
           {/* <h1 className="text-xl font-semibold tracking-tight">RealMe AI</h1> */}
         </div>
 
-        <div className="rounded-xl border border-border bg-card p-6 shadow-sm lg:min-w-md">
+        <div className="rounded-xl border border-border bg-card p-6 shadow-sm w-full lg:min-w-md">
           {children}
         </div>
       </div>

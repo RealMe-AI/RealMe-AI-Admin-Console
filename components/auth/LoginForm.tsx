@@ -8,6 +8,8 @@ import { Separator } from "@/components/ui/separator";
 import { GoogleLogin } from "@react-oauth/google";
 import { useLogin, useGoogleLogin } from "@/hooks/auth";
 import { Loader } from "../shared/Loader";
+import { div } from "framer-motion/client";
+import { GoogleIcon } from "../icons/GoogleIcon";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
@@ -75,14 +77,20 @@ export function LoginForm() {
           <Loader />
         </Button>
       ) : (
-        <GoogleLogin
-          onSuccess={onGoogleSuccess}
-          theme="outline"
-          size="medium"
-          shape="pill"
-          width="100%"
-          // containerProps={{ style: { width: '100%' } }}
-        />
+        <div className="relative">
+          <div className="absolute inset-0 z-10 opacity-0">
+            <GoogleLogin
+              onSuccess={onGoogleSuccess}
+              theme="outline"
+              size="medium"
+              shape="pill"
+              width="100%"
+            />
+          </div>
+          <Button className="w-full gap-2" variant="outline">
+            <GoogleIcon /> Sign in with Google
+          </Button>
+        </div>
       )}
 
       {/* <p className="text-center text-sm text-muted-foreground">
