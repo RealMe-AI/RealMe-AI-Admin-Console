@@ -65,7 +65,7 @@ export function LoginForm() {
         </span>
       </div>
 
-      <div className="flex justify-center w-full">
+      <div>
         {googlePending ? (
           <Button type="button" variant="outline" className="w-full" disabled>
             <Loader />
@@ -76,7 +76,7 @@ export function LoginForm() {
             theme="outline"
             size="medium"
             shape="pill"
-            // width="100%"
+            width="100%"
             containerProps={{ style: { width: '100%' } }}
           />
         )}
