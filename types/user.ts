@@ -4,6 +4,7 @@ export type UserPlan = "free" | "pro" | "enterprise"
 export interface User {
   id: string
   name: string
+  initials?: string
   email: string
   avatar: string
   country: string
@@ -19,8 +20,26 @@ export interface User {
 
 export interface UserFilters {
   search?: string
-  country?: string
-  city?: string
   plan?: UserPlan | ""
   status?: UserStatus | ""
+}
+
+export type UserListParams = {
+  search?: string
+  status?: string
+  plan?: string
+  page?: number
+  limit?: number
+}
+
+export interface UserListMeta {
+  total: number
+  page: number
+  limit: number
+  totalPages: number
+}
+
+export interface UserListResponse {
+  data: User[]
+  meta: UserListMeta
 }

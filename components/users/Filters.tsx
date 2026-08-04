@@ -2,7 +2,6 @@
 
 import { FilterBar, FilterSelect } from "@/components/shared/FilterBar"
 import { SearchBar } from "@/components/shared/SearchBar"
-import { countries } from "@/constants/countries"
 import type { UserFilters, UserPlan, UserStatus } from "@/types/user"
 
 const plans: { value: UserPlan | ""; label: string }[] = [
@@ -36,13 +35,6 @@ export function Filters({ filters, onFiltersChange }: FiltersProps) {
         onChange={(v) => update("search", v)}
         placeholder="Search users..."
         className="w-56"
-      />
-      <FilterSelect
-        label="Country"
-        value={filters.country || ""}
-        options={countries}
-        onChange={(v) => update("country", v)}
-        placeholder="All Countries"
       />
       <FilterSelect
         label="Plan"

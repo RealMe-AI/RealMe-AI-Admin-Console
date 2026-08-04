@@ -136,7 +136,7 @@ export const PostFormData = async <T = unknown>(
 
 export const PatchRequest = async <T = unknown>(
   route: string,
-  data: RequestData
+  data?: RequestData
 ) => {
   const response = await apiClient.patch<T>(getUrl(route), data, {
     headers: getHeaders(data),

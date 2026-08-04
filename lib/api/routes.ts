@@ -3,4 +3,14 @@ export const API_ROUTES = {
     login: "/auth/login",
     googleSignin: "/auth/admin/google",
   },
+  admin: {
+    // user management
+    users: {
+      list: "/admin/users",
+      detail: (id: string) => `/admin/users/${id}`,
+      suspend: (id: string) => `/admin/users/${id}/suspend`,
+      unsuspend: (id: string) => `/admin/users/${id}/unsuspend`,
+      delete: (id: string) => `/admin/users/${id}`,
+    },
+  },
 };
