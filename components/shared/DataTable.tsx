@@ -36,7 +36,11 @@ export function DataTable<T>({
     data,
     columns,
     state: { sorting },
-    onSortingChange: onSortingChange as any,
+    onSortingChange: (updater) => {
+      onSortingChange?.(
+        typeof updater === "function" ? updater(sorting ?? []) : updater,
+      )
+    },
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     manualSorting: true,

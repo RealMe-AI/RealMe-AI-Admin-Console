@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState } from "react"
 import { PageHeader } from "@/components/shared/PageHeader"
 import { PageContainer } from "@/components/shared/PageContainer"
 import { SectionCard } from "@/components/shared/SectionCard"
@@ -9,69 +9,52 @@ import { UserTable } from "@/components/users/UserTable"
 import { Filters } from "@/components/users/Filters"
 import { ProfileDrawer } from "@/components/users/ProfileDrawer"
 import { ConfirmationDialog } from "@/components/shared/ConfirmationDialog"
-import { users as allUsers } from "@/data/users"
+import { useAdminUsers } from "@/hooks/users"
 import type { UserFilters } from "@/types/user"
 
-const ITEMS_PER_PAGE = 5
+const ITEMS_PER_PAGE = 20
 
 export default function UsersPage() {
   const [filters, setFilters] = useState<UserFilters>({})
   const [page, setPage] = useState(1)
 
-  const filteredUsers = useMemo(() => {
-    let result = [...allUsers]
+  const { data, isLoading } = useAdminUsers({
+    search: filters.search || undefined,
+    status: filters.status || undefined,
+    plan: filters.plan || undefined,
+    page,
+    limit: ITEMS_PER_PAGE,
+  })
 
-    if (filters.search) {
-      const q = filters.search.toLowerCase()
-      result = result.filter(
-        (u) =>
-          u.name.toLowerCase().includes(q) ||
-          u.email.toLowerCase().includes(q),
-      )
-    }
-    if (filters.country) {
-      result = result.filter((u) => u.countryCode === filters.country)
-    }
-    if (filters.plan) {
-      result = result.filter((u) => u.plan === filters.plan)
-    }
-    if (filters.status) {
-      result = result.filter((u) => u.status === filters.status)
-    }
+  const users = data?.data ?? []
+  const meta = data?.meta
 
-    return result
-  }, [filters])
-
-  const totalPages = Math.ceil(filteredUsers.length / ITEMS_PER_PAGE)
-  const paginatedUsers = filteredUsers.slice(
-    (page - 1) * ITEMS_PER_PAGE,
-    page * ITEMS_PER_PAGE,
-  )
+  function handleFiltersChange(next: UserFilters) {
+    setFilters(next)
+    setPage(1)
+  }
 
   return (
     <PageContainer>
       <PageHeader
         title="Users"
-        description={`${filteredUsers.length} total users`}
+        description={`${meta?.total ?? 0} total users`}
       />
 
       <SectionCard>
-        <Filters filters={filters} onFiltersChange={setFilters} />
+        <Filters filters={filters} onFiltersChange={handleFiltersChange} />
         <div className="mt-4">
-          <UserTable users={paginatedUsers} />
+          <UserTable users={users} loading={isLoading} />
         </div>
         <div className="mt-4">
           <Pagination
-            page={page}
-            totalPages={totalPages}
+            page={meta?.page ?? page}
+            totalPages={meta?.totalPages ?? 1}
             onPageChange={setPage}
           />
         </div>
       </SectionCard>
 
-      {/* This pattern is ready for API integration:
-          GET /admin/users?page=X&country=NG&status=ACTIVE&q=...
-          just replace the mock filtering/pagination with props from the server */}
       <ProfileDrawer />
       <ConfirmationDialog />
     </PageContainer>
