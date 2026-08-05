@@ -1,6 +1,6 @@
 export const API_ROUTES = {
   auth: {
-    login: "/auth/login",
+    login: "/auth/admin/login",
     googleSignin: "/auth/admin/google",
   },
   admin: {
