@@ -7,15 +7,17 @@ import { Loader } from "../shared/Loader"
 
 export function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter()
-  const { accessToken, isAdmin } = useAuthStore()
+  const accessToken = useAuthStore((s) => s.accessToken)
+  const isAdmin = useAuthStore((s) => s.isAdmin)
+  const hydrated = useAuthStore((s) => s._hasHydrated)
 
   useEffect(() => {
-    if (!accessToken || !isAdmin) {
+    if (hydrated && (!accessToken || !isAdmin)) {
       router.replace("/login")
     }
-  }, [accessToken, isAdmin, router])
+  }, [hydrated, accessToken, isAdmin, router])
 
-  if (!accessToken || !isAdmin) {
+  if (!hydrated || !accessToken || !isAdmin) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <Loader />
