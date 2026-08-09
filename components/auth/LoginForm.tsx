@@ -8,7 +8,6 @@ import { Separator } from "@/components/ui/separator";
 import { GoogleLogin } from "@react-oauth/google";
 import { useLogin, useGoogleLogin } from "@/hooks/auth";
 import { Loader } from "../shared/Loader";
-import { div } from "framer-motion/client";
 import { GoogleIcon } from "../icons/GoogleIcon";
 
 export function LoginForm() {
@@ -62,7 +61,7 @@ export function LoginForm() {
         className="w-full"
         disabled={login.isPending || googlePending}
       >
-        {login.isPending ? <Loader className="text-white" /> : "Sign in"}
+        {login.isPending ? <Loader className="text-black" /> : "Sign in"}
       </Button>
 
       <div className="relative">

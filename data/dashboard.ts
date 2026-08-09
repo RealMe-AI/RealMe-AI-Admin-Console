@@ -21,7 +21,7 @@ export const dashboardData: DashboardData = {
       label: "Total Users",
       value: "12,845",
       change: "+12.5%",
-      changeType: "positive",
+      changeType: "increase",
       icon: "Users",
     },
     {
@@ -29,7 +29,7 @@ export const dashboardData: DashboardData = {
       label: "Active Users",
       value: "8,234",
       change: "+8.2%",
-      changeType: "positive",
+      changeType: "increase",
       icon: "Activity",
     },
     {
@@ -37,7 +37,7 @@ export const dashboardData: DashboardData = {
       label: "Revenue (MTD)",
       value: "$48,290",
       change: "+23.1%",
-      changeType: "positive",
+      changeType: "increase",
       icon: "DollarSign",
     },
     {
@@ -45,7 +45,7 @@ export const dashboardData: DashboardData = {
       label: "API Calls (MTD)",
       value: "2.4M",
       change: "-3.2%",
-      changeType: "negative",
+      changeType: "decrease",
       icon: "Cpu",
     },
   ],

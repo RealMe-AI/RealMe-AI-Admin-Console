@@ -3,7 +3,7 @@ export interface Stat {
   label: string
   value: string
   change: string
-  changeType: "positive" | "negative" | "neutral"
+  changeType: "increase" | "decrease"
   icon: string
 }
 

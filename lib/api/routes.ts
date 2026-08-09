@@ -12,5 +12,9 @@ export const API_ROUTES = {
       unsuspend: (id: string) => `/admin/users/${id}/unsuspend`,
       delete: (id: string) => `/admin/users/${id}`,
     },
+    // dashboard
+    dashboard: {
+      stats: "/admin/dashboard/stats",
+    },
   },
 };
