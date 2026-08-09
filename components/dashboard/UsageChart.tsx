@@ -1,5 +1,7 @@
 "use client"
 
+import { useEffect } from "react"
+import { toast } from "sonner"
 import {
   AreaChart,
   Area,
@@ -9,13 +11,28 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts"
-import { dashboardData } from "@/data/dashboard"
+import { useUsageChart } from "@/hooks/dashboard"
+import { getErrorMessage } from "@/lib/api/api"
+import { Skeleton } from "@/components/ui/skeleton"
+import { formatChartDate, formatCount } from "./mapping"
 
 export function UsageChart() {
+  const { data, isLoading, isError, error } = useUsageChart()
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(getErrorMessage(error))
+    }
+  }, [isError, error])
+
+  if (isLoading || isError) {
+    return <Skeleton className="h-72 w-full" />
+  }
+
   return (
     <div className="h-72">
       <ResponsiveContainer width="100%" height="100%">
-        <AreaChart data={dashboardData.usageChart}>
+        <AreaChart data={data}>
           <defs>
             <linearGradient id="usageGradient" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="var(--color-primary)" stopOpacity={0.15} />
@@ -29,12 +46,13 @@ export function UsageChart() {
             tickLine={false}
             axisLine={false}
             interval="preserveStartEnd"
+            tickFormatter={formatChartDate}
           />
           <YAxis
             tick={{ fontSize: 11, fill: "var(--color-muted-foreground)" }}
             tickLine={false}
             axisLine={false}
-            tickFormatter={(v: number) => `${(v / 1000).toFixed(0)}k`}
+            tickFormatter={formatCount}
           />
           <Tooltip
             contentStyle={{
@@ -43,6 +61,9 @@ export function UsageChart() {
               borderRadius: "8px",
               fontSize: "12px",
             }}
+            labelFormatter={(label) =>
+              typeof label === "string" ? formatChartDate(label) : label
+            }
             formatter={(value) => [`${Number(value).toLocaleString()}`, "API Calls"]}
           />
           <Area
