@@ -23,9 +23,9 @@ const iconMap: Record<string, React.ElementType> = {
 export function StatCard({ stat, index }: { stat: Stat; index: number }) {
   const Icon = iconMap[stat.icon] || Activity;
   const TrendIcon =
-    stat.changeType === "positive"
+    stat.changeType === "increase"
       ? TrendingUp
-      : stat.changeType === "negative"
+      : stat.changeType === "decrease"
         ? TrendingDown
         : Minus;
 
@@ -53,17 +53,15 @@ export function StatCard({ stat, index }: { stat: Stat; index: number }) {
         <TrendIcon
           className={cn(
             "size-3.5",
-            stat.changeType === "positive" && "text-success",
-            stat.changeType === "negative" && "text-destructive",
-            stat.changeType === "neutral" && "text-muted-foreground",
+            stat.changeType === "increase" && "text-success",
+            stat.changeType === "decrease" && "text-destructive",
           )}
         />
         <span
           className={cn(
             "text-xs font-medium",
-            stat.changeType === "positive" && "text-success",
-            stat.changeType === "negative" && "text-destructive",
-            stat.changeType === "neutral" && "text-muted-foreground",
+            stat.changeType === "increase" && "text-success",
+            stat.changeType === "decrease" && "text-destructive",
           )}
         >
           {stat.change}
