@@ -16,6 +16,7 @@ export const API_ROUTES = {
     dashboard: {
       stats: "/admin/dashboard/stats",
       usageChart: "/admin/dashboard/usage-chart",
+      activities: "/admin/dashboard/activities",
     },
   },
 };

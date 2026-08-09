@@ -9,7 +9,7 @@ export interface Stat {
 
 export interface Activity {
   id: string
-  user: { name: string; avatar: string }
+  user: { name: string; avatar: string | null }
   action: string
   target: string
   timestamp: string
@@ -18,11 +18,4 @@ export interface Activity {
 export interface ChartDataPoint {
   date: string
   value: number
-}
-
-export interface DashboardData {
-  stats: Stat[]
-  usageChart: ChartDataPoint[]
-  revenueChart: ChartDataPoint[]
-  activities: Activity[]
 }
