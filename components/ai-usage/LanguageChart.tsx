@@ -9,13 +9,41 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts"
-import { aiUsageData } from "@/data/ai-usage"
+import { Skeleton } from "@/components/ui/skeleton"
+import { getLanguageName } from "@/constants/languages"
+import type { LanguageUsage } from "@/types/aiUsage"
 
-export function LanguageChart() {
+interface LanguageChartProps {
+  data?: LanguageUsage[]
+  loading?: boolean
+}
+
+export function LanguageChart({ data, loading }: LanguageChartProps) {
+  if (loading || !data) {
+    return (
+      <div className="flex h-72 flex-col justify-center gap-3">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div key={i} className="flex items-center gap-3">
+            <Skeleton className="h-3 w-16" />
+            <Skeleton
+              className="h-5"
+              style={{ width: `${75 - i * 9}%` }}
+            />
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  const chartData = data.map((d) => ({
+    ...d,
+    languageName: getLanguageName(d.language),
+  }))
+
   return (
     <div className="h-72">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={aiUsageData.callsByLanguage} layout="vertical">
+        <BarChart data={chartData} layout="vertical">
           <CartesianGrid
             strokeDasharray="3 3"
             stroke="var(--color-border)"
@@ -29,7 +57,7 @@ export function LanguageChart() {
             tickFormatter={(v: number) => `${(v / 1000).toFixed(0)}k`}
           />
           <YAxis
-            dataKey="language"
+            dataKey="languageName"
             type="category"
             tick={{ fontSize: 11, fill: "var(--color-muted-foreground)" }}
             tickLine={false}

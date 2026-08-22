@@ -1,3 +1,21 @@
+export interface AiUsageStats {
+  totalApiCalls: number
+  totalTokens: number
+  totalCost: number
+  avgResponseTime: string | null
+}
+
+export interface LanguageUsage {
+  language: string
+  calls: number
+  tokens: number
+}
+
+export interface DailyCostPoint {
+  date: string
+  cost: number
+}
+
 export interface ModelUsage {
   model: string
   calls: number
@@ -21,6 +39,16 @@ export interface UsageLog {
   cost: number
   conversationId: string | null
   createdAt: string
+}
+
+export interface UsageLogListResponse {
+  data: UsageLog[]
+  meta: {
+    total: number
+    page: number
+    limit: number
+    totalPages: number
+  }
 }
 
 export type DatePreset = "7d" | "30d" | "90d" | "all"

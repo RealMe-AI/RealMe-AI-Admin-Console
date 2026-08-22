@@ -15,3 +15,12 @@ export const languages: LanguageOption[] = [
   { value: "sw", label: "Swahili" },
   { value: "ar", label: "Arabic" },
 ]
+
+export const LANG_NAMES: Record<string, string> = {
+  ...Object.fromEntries(languages.map((l) => [l.value, l.label])),
+  unknown: "Unknown",
+}
+
+export function getLanguageName(code: string): string {
+  return LANG_NAMES[code] ?? code
+}

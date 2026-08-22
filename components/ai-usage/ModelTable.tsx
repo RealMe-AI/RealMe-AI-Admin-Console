@@ -1,4 +1,5 @@
 import type { ModelUsage } from "@/types/aiUsage";
+import { Skeleton } from "@/components/ui/skeleton";
 
 function abbreviate(n: number): string {
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
@@ -6,7 +7,22 @@ function abbreviate(n: number): string {
   return n.toLocaleString();
 }
 
-export function ModelTable({ models }: { models: ModelUsage[] }) {
+interface ModelTableProps {
+  models?: ModelUsage[];
+  loading?: boolean;
+}
+
+export function ModelTable({ models, loading }: ModelTableProps) {
+  if (loading || !models) {
+    return (
+      <div className="space-y-2">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <Skeleton key={i} className="h-10 w-full" />
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="overflow-x-auto rounded-lg border border-border">
       <table className="w-full text-sm">

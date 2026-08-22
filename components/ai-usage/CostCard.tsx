@@ -9,10 +9,24 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts"
-import { aiUsageData } from "@/data/ai-usage"
+import { Skeleton } from "@/components/ui/skeleton"
+import type { DailyCostPoint } from "@/types/aiUsage"
 
-export function CostCard() {
-  const costData = aiUsageData.callsByDay.map((d) => ({
+interface CostCardProps {
+  data?: DailyCostPoint[]
+  loading?: boolean
+}
+
+export function CostCard({ data, loading }: CostCardProps) {
+  if (loading || !data) {
+    return (
+      <div className="h-72">
+        <Skeleton className="h-full w-full" />
+      </div>
+    )
+  }
+
+  const costData = data.map((d) => ({
     date: d.date,
     cost: d.cost,
   }))
@@ -38,6 +52,12 @@ export function CostCard() {
             tickLine={false}
             axisLine={false}
             interval="preserveStartEnd"
+            tickFormatter={(v: string) =>
+              new Date(v).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+              })
+            }
           />
           <YAxis
             tick={{ fontSize: 11, fill: "var(--color-muted-foreground)" }}
