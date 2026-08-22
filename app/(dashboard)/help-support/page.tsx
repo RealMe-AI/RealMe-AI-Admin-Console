@@ -4,16 +4,10 @@ import { useState } from "react"
 import { PageHeader } from "@/components/shared/PageHeader"
 import { PageContainer } from "@/components/shared/PageContainer"
 import { SectionCard } from "@/components/shared/SectionCard"
-import { Button } from "@/components/ui/button"
+import { ConfirmationDialog } from "@/components/shared/ConfirmationDialog"
+import { EmailSupportForm } from "@/components/help-support/EmailSupportForm"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+import { Button } from "@/components/ui/button"
 import { Mail, MessageSquare } from "lucide-react"
 
 const supportOptions = [
@@ -45,10 +39,6 @@ const mockMessages = [
 
 export default function HelpSupportPage() {
   const [activeSupport, setActiveSupport] = useState<"email" | "chat">("email")
-  const [subject, setSubject] = useState("")
-  const [message, setMessage] = useState("")
-  const [sendTo, setSendTo] = useState<"all" | "particular">("all")
-  const [recipient, setRecipient] = useState("")
 
   return (
     <PageContainer>
@@ -86,53 +76,7 @@ export default function HelpSupportPage() {
 
       {activeSupport === "email" ? (
         <SectionCard title="Send us a message">
-          <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-            <div className="space-y-2 w-48">
-              <Label htmlFor="sendTo">Send to</Label>
-              <Select value={sendTo} onValueChange={(v) => v && setSendTo(v as "all" | "particular")}>
-                <SelectTrigger className="w-full">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All users</SelectItem>
-                  <SelectItem value="particular">Particular user</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            {sendTo === "particular" && (
-              <div className="space-y-2">
-                <Label htmlFor="recipient">Recipient email</Label>
-                <Input
-                  id="recipient"
-                  type="email"
-                  placeholder="user@example.com"
-                  value={recipient}
-                  onChange={(e) => setRecipient(e.target.value)}
-                />
-              </div>
-            )}
-            <div className="space-y-2">
-              <Label htmlFor="subject">Subject</Label>
-              <Input
-                id="subject"
-                placeholder="How can we help?"
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="message">Message</Label>
-              <textarea
-                id="message"
-                rows={5}
-                placeholder="Describe your issue..."
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                className="w-full rounded-lg border border-border bg-background p-3 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-ring focus:ring-3 focus:ring-ring/20"
-              />
-            </div>
-            <Button type="submit">Send message</Button>
-          </form>
+          <EmailSupportForm />
         </SectionCard>
       ) : (
         <SectionCard title="Live Chat">
@@ -164,6 +108,8 @@ export default function HelpSupportPage() {
           </div>
         </SectionCard>
       )}
+
+      <ConfirmationDialog />
     </PageContainer>
   )
 }

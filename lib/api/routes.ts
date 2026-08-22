@@ -26,5 +26,9 @@ export const API_ROUTES = {
       byModel: "/admin/ai-usage/by-model",
       logs: "/admin/ai-usage/logs",
     },
+    // support
+    support: {
+      sendEmail: "/admin/support/send-email",
+    },
   },
 };
